@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart – MyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+  <div id="toast-container"></div>
+
+  <div id="sidebar">
+    <div class="menu-header">
+      <span class="menu-icon">☰</span>
+      <span class="menu-text">MyShop</span>
+    </div>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="categories.html">🗂️ Categories</a></li>
+      <li><a href="cart.html">🛒 Cart <span id="sidebar-cart-count" class="sidebar-badge"></span></a></li>
+      <li><a href="order.html">📦 Orders</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+    </ul>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <div id="main">
+
+    <nav id="navbar">
+      <div class="nav-left">
+        <img src="images/ChatGPT Image Apr 11, 2026, 05_11_48 PM.png" class="logo-img" alt="MyShop">
+      </div>
+      <div class="nav-center">
+        <span class="nav-title">My Cart 🛒</span>
+        <span class="nav-subtitle" id="nav-subtitle">Loading...</span>
+      </div>
+      <div class="nav-right">
+        <div class="cart-wrapper" onclick="window.location.href='cart.html'" title="Cart">
+          <span>🛒</span>
+          <span id="cart-count" class="cart-badge hidden">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cart-layout" id="cart-layout">
+      <div class="cart-items-col">
+        <div class="cart-header-row">
+          <h2 class="cart-title">Your Items</h2>
+          <button class="clear-all-btn" onclick="confirmClearCart()">Remove All</button>
+        </div>
+        <div id="cart-items-list"></div>
+      </div>
+
+      <div class="cart-summary-col" id="cart-summary">
+        <div class="summary-card">
+          <h3 class="summary-title">Order Summary</h3>
+          <div class="summary-row">
+            <span>Items (<span id="summary-count">0</span>)</span>
+            <span id="summary-subtotal">Rs 0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery</span>
+            <span id="summary-delivery" class="free-tag">Free</span>
+          </div>
+          <div class="summary-row discount-row" id="discount-row" style="display:none">
+            <span>Discount (10%)</span>
+            <span id="summary-discount" class="discount-tag">– Rs 0</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row total-row">
+            <span>Total</span>
+            <span id="summary-total">Rs 0</span>
+          </div>
+          <div class="promo-section">
+            <p class="promo-label">Promo Code</p>
+            <div class="promo-bar">
+              <input type="text" id="promo-input" placeholder="Try SAVE10">
+              <button onclick="applyPromo()">Apply</button>
+            </div>
+            <p class="promo-msg" id="promo-msg"></p>
+          </div>
+          <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+          <a href="index.html" class="continue-link">← Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="empty-cart" class="empty-cart-state hidden">
+      <div class="empty-cart-icon">🛒</div>
+      <h3>Your cart is empty</h3>
+      <p>Add some items to get started!</p>
+      <button onclick="window.location.href='index.html'">Start Shopping</button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>

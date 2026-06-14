@@ -1,0 +1,266 @@
+/* ─── HERO STRIP ─── */
+.cat-hero {
+  margin: 14px 18px 0;
+  background: linear-gradient(135deg, var(--primary) 0%, #3d2318 100%);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  animation: fadeUp 0.6s ease both;
+  overflow: hidden;
+  position: relative;
+}
+
+.cat-hero::before {
+  content: "";
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  top: -80px; right: 60px;
+  pointer-events: none;
+}
+
+.cat-hero::after {
+  content: "";
+  position: absolute;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  bottom: -50px; right: -20px;
+  pointer-events: none;
+}
+
+.cat-hero-text { flex: 1; }
+
+.cat-hero-text h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.cat-hero-text p {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.65);
+}
+
+.cat-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  min-width: 72px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.stat-num {
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.stat-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ─── GRID ─── */
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  padding: 18px 18px 40px;
+}
+
+/* ─── CATEGORY CARD ─── */
+.category-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  height: 220px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  animation: card-in 0.45s ease both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* stagger */
+.category-card:nth-child(1) { animation-delay: 0ms;  }
+.category-card:nth-child(2) { animation-delay: 80ms; }
+.category-card:nth-child(3) { animation-delay: 160ms;}
+.category-card:nth-child(4) { animation-delay: 240ms;}
+.category-card:nth-child(5) { animation-delay: 320ms;}
+
+/* ─── IMAGE ─── */
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: block;
+}
+
+/* ─── OVERLAY ─── */
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(30,12,5,0.88) 0%,
+    rgba(30,12,5,0.35) 50%,
+    rgba(30,12,5,0.05) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+/* ─── CONTENT ─── */
+.cat-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px 18px 18px;
+  z-index: 2;
+  transform: translateY(0);
+  transition: transform 0.35s ease;
+}
+
+.cat-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cat-emoji {
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  transition: transform 0.3s ease;
+}
+
+/* ─── COUNT BADGE ─── */
+.cat-badge {
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  transition: background 0.3s ease;
+}
+
+.cat-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.cat-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  transform: translateY(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ─── EXPLORE BUTTON (hidden → shown on hover) ─── */
+.cat-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  background: white;
+  color: var(--primary);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+}
+
+.cat-explore-btn .arrow {
+  transition: transform 0.25s ease;
+}
+
+/* ─── HOVER STATE ─── */
+.category-card:hover img {
+  transform: scale(1.1);
+}
+
+.category-card:hover .cat-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(30,12,5,0.94) 0%,
+    rgba(30,12,5,0.55) 55%,
+    rgba(30,12,5,0.15) 100%
+  );
+}
+
+.category-card:hover .cat-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.category-card:hover .cat-explore-btn {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.category-card:hover .cat-explore-btn .arrow {
+  transform: translateX(3px);
+}
+
+.category-card:hover .cat-emoji {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.category-card:hover .cat-badge {
+  background: rgba(164,117,81,0.7);
+  border-color: rgba(164,117,81,0.5);
+}
+
+/* ─── ACTIVE (click press) ─── */
+.category-card:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .cat-hero {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 18px 20px;
+  }
+  .cat-hero-text h2 { font-size: 18px; }
+  .categories-container { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; padding: 14px 14px 30px; }
+  .category-card { height: 180px; }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders – MyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="order.css">
+</head>
+<body>
+
+  <div id="toast-container"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="menu-header">
+      <span class="menu-icon">☰</span>
+      <span class="menu-text">MyShop</span>
+    </div>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="categories.html">🗂️ Categories</a></li>
+      <li><a href="cart.html">🛒 Cart <span id="sidebar-cart-count" class="sidebar-badge"></span></a></li>
+      <li><a href="order.html">📦 Orders</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+    </ul>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+
+    <nav id="navbar">
+      <div class="nav-left">
+        <img src="images/ChatGPT Image Apr 11, 2026, 05_11_48 PM.png" class="logo-img" alt="MyShop">
+      </div>
+      <div class="nav-center">
+        <span class="nav-title">My Orders 📦</span>
+        <span class="nav-subtitle" id="nav-subtitle">Loading your orders...</span>
+      </div>
+      <div class="nav-right">
+        <div class="cart-wrapper" onclick="window.location.href='cart.html'" title="Cart">
+          <span>🛒</span>
+          <span id="cart-count" class="cart-badge hidden">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Filter tabs -->
+    <div class="orders-toolbar">
+      <div class="status-tabs">
+        <button class="tab-btn active" data-filter="all"        onclick="filterOrders(this,'all')">All</button>
+        <button class="tab-btn"        data-filter="Processing" onclick="filterOrders(this,'Processing')">Processing</button>
+        <button class="tab-btn"        data-filter="Shipped"    onclick="filterOrders(this,'Shipped')">Shipped</button>
+        <button class="tab-btn"        data-filter="Delivered"  onclick="filterOrders(this,'Delivered')">Delivered</button>
+        <button class="tab-btn"        data-filter="Cancelled"  onclick="filterOrders(this,'Cancelled')">Cancelled</button>
+      </div>
+      <p class="orders-count" id="orders-count"></p>
+    </div>
+
+    <!-- Orders list -->
+    <div id="orders-list"></div>
+
+    <!-- Empty state -->
+    <div id="empty-orders" class="empty-orders hidden">
+      <div class="empty-orders-icon">📭</div>
+      <h3>No orders here</h3>
+      <p id="empty-orders-msg">You haven't placed any orders yet.</p>
+      <button onclick="window.location.href='index.html'">Start Shopping</button>
+    </div>
+
+  </div>
+
+  <!-- Order Detail Modal -->
+  <div id="order-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h3 id="modal-order-id"></h3>
+          <p id="modal-order-date" class="modal-date"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modal-items-list" class="modal-items"></div>
+      <div class="modal-summary">
+        <div class="modal-row"><span>Subtotal</span><span id="modal-subtotal"></span></div>
+        <div class="modal-row" id="modal-discount-row"><span>Discount</span><span id="modal-discount" class="modal-discount-val"></span></div>
+        <div class="modal-divider"></div>
+        <div class="modal-row modal-total-row"><span>Total Paid</span><span id="modal-total"></span></div>
+      </div>
+      <div id="modal-actions" class="modal-actions"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="order.js"></script>
+</body>
+</html>

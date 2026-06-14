@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories – MyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="categories.css">
+</head>
+<body>
+
+  <div id="toast-container"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="menu-header">
+      <span class="menu-icon">☰</span>
+      <span class="menu-text">MyShop</span>
+    </div>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="categories.html">🗂️ Categories</a></li>
+      <li><a href="cart.html">🛒 Cart <span id="sidebar-cart-count" class="sidebar-badge"></span></a></li>
+      <li><a href="order.html">📦 Orders</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+    </ul>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+
+    <nav id="navbar">
+      <div class="nav-left">
+        <img src="images/ChatGPT Image Apr 11, 2026, 05_11_48 PM.png" class="logo-img" alt="MyShop">
+      </div>
+      <div class="nav-center">
+        <span class="nav-title">Categories 🗂️</span>
+        <span class="nav-subtitle" id="nav-subtitle">27 products across 5 categories</span>
+      </div>
+      <div class="nav-right">
+        <div class="cart-wrapper" onclick="window.location.href='cart.html'" title="Cart">
+          <span>🛒</span>
+          <span id="cart-count" class="cart-badge hidden">0</span>
+        </div>
+        <div class="wishlist-nav" title="Wishlist">
+          <span>🤍</span>
+          <span id="wishlist-count" class="wishlist-badge hidden">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Strip -->
+    <div class="cat-hero">
+      <div class="cat-hero-text">
+        <h2>Shop by Category</h2>
+        <p>Pick a vibe and explore what's waiting for you ✨</p>
+      </div>
+      <div class="cat-hero-stat">
+        <span class="stat-num">27</span>
+        <span class="stat-lbl">Products</span>
+      </div>
+      <div class="cat-hero-stat">
+        <span class="stat-num">5</span>
+        <span class="stat-lbl">Categories</span>
+      </div>
+    </div>
+
+    <!-- Category Grid -->
+    <div class="categories-container" id="categories-container"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script src="categories.js"></script>
+</body>
+</html>

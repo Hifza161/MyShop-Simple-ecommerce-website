@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – MyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+  <div id="toast-container"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="menu-header">
+      <span class="menu-icon">☰</span>
+      <span class="menu-text">MyShop</span>
+    </div>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="categories.html">🗂️ Categories</a></li>
+      <li><a href="cart.html">🛒 Cart <span id="sidebar-cart-count" class="sidebar-badge"></span></a></li>
+      <li><a href="order.html">📦 Orders</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+    </ul>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+
+    <nav id="navbar">
+      <div class="nav-left">
+        <img src="images/ChatGPT Image Apr 11, 2026, 05_11_48 PM.png" class="logo-img" alt="MyShop">
+      </div>
+      <div class="nav-center">
+        <span class="nav-title">My Profile 👤</span>
+        <span class="nav-subtitle" id="nav-subtitle">Loading...</span>
+      </div>
+      <div class="nav-right">
+        <div class="cart-wrapper" onclick="window.location.href='cart.html'" title="Cart">
+          <span>🛒</span>
+          <span id="cart-count" class="cart-badge hidden">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="profile-layout">
+
+      <!-- LEFT: Avatar + quick nav -->
+      <aside class="profile-aside">
+
+        <div class="avatar-card">
+          <div class="avatar-ring">
+            <div class="avatar-circle" id="avatar-circle">HF</div>
+          </div>
+          <h2 class="profile-display-name" id="profile-display-name">Hifza</h2>
+          <p class="profile-display-email" id="profile-display-email">hifza@myshop.pk</p>
+          <span class="member-badge">✦ Member since 2026</span>
+        </div>
+
+        <nav class="profile-nav">
+          <button class="prof-nav-btn active" data-tab="info"      onclick="switchTab(this,'info')">      👤 Personal Info</button>
+          <button class="prof-nav-btn"         data-tab="stats"     onclick="switchTab(this,'stats')">     📊 My Stats</button>
+          <button class="prof-nav-btn"         data-tab="wishlist"  onclick="switchTab(this,'wishlist')">  ❤️ Wishlist</button>
+          <button class="prof-nav-btn"         data-tab="recent"    onclick="switchTab(this,'recent')">    📦 Recent Orders</button>
+          <button class="prof-nav-btn"         data-tab="settings"  onclick="switchTab(this,'settings')">  ⚙️ Settings</button>
+        </nav>
+
+      </aside>
+
+      <!-- RIGHT: Tab content -->
+      <main class="profile-content">
+
+        <!-- ── TAB: Personal Info ── -->
+        <section class="prof-tab active" id="tab-info">
+          <div class="tab-header">
+            <h3 class="tab-title">Personal Information</h3>
+            <button class="edit-toggle-btn" id="edit-btn" onclick="toggleEdit()">
+              <span id="edit-btn-icon">✏️</span>
+              <span id="edit-btn-text">Edit Profile</span>
+            </button>
+          </div>
+
+          <!-- VIEW MODE: styled info cards -->
+          <div class="info-view" id="info-view">
+
+            <p class="info-section-label">Account Details</p>
+            <div class="info-cards-row">
+              <div class="info-card" style="animation-delay:0ms">
+                <div class="info-card-icon">👤</div>
+                <div class="info-card-body">
+                  <p class="info-card-label">Full Name</p>
+                  <p class="info-card-value" id="view-name">Hifza</p>
+                </div>
+              </div>
+              <div class="info-card" style="animation-delay:60ms">
+                <div class="info-card-icon">🏷️</div>
+                <div class="info-card-body">
+                  <p class="info-card-label">Username</p>
+                  <p class="info-card-value" id="view-username">@hifza</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="info-section-label">Contact</p>
+            <div class="info-cards-row">
+              <div class="info-card" style="animation-delay:120ms">
+                <div class="info-card-icon">📧</div>
+                <div class="info-card-body">
+                  <p class="info-card-label">Email</p>
+                  <p class="info-card-value" id="view-email">hifza@myshop.pk</p>
+                </div>
+              </div>
+              <div class="info-card" style="animation-delay:180ms">
+                <div class="info-card-icon">📞</div>
+                <div class="info-card-body">
+                  <p class="info-card-label">Phone</p>
+                  <p class="info-card-value" id="view-phone">+92 300 0000000</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="info-section-label">Delivery</p>
+            <div class="info-cards-row single">
+              <div class="info-card" style="animation-delay:240ms">
+                <div class="info-card-icon">📍</div>
+                <div class="info-card-body">
+                  <p class="info-card-label">Delivery Address</p>
+                  <p class="info-card-value" id="view-address">Lahore, Punjab, Pakistan</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- EDIT MODE: inputs (hidden by default) -->
+          <div class="info-form" id="info-form">
+            <div class="field-row">
+              <div class="field-group">
+                <label><span>👤</span> Full Name</label>
+                <input type="text"  id="field-name"     placeholder="Your full name">
+              </div>
+              <div class="field-group">
+                <label><span>🏷️</span> Username</label>
+                <input type="text"  id="field-username" placeholder="Username" readonly style="opacity:0.6;cursor:not-allowed">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label><span>📧</span> Email</label>
+                <input type="email" id="field-email"   placeholder="your@email.com">
+              </div>
+              <div class="field-group">
+                <label><span>📞</span> Phone</label>
+                <input type="tel"   id="field-phone"   placeholder="+92 300 0000000">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group full-width">
+                <label><span>📍</span> Delivery Address</label>
+                <input type="text"  id="field-address" placeholder="City, Province, Country">
+              </div>
+            </div>
+            <div class="form-actions" id="form-actions">
+              <button class="btn-discard" onclick="discardEdit()">✕ Discard</button>
+              <button class="btn-save"    onclick="saveProfile()">✓ Save Changes</button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ── TAB: Stats ── -->
+        <section class="prof-tab" id="tab-stats">
+          <div class="tab-header">
+            <h3 class="tab-title">My Shopping Stats</h3>
+          </div>
+          <div class="stats-grid" id="stats-grid"></div>
+          <div class="spending-section" id="spending-section"></div>
+        </section>
+
+        <!-- ── TAB: Wishlist ── -->
+        <section class="prof-tab" id="tab-wishlist">
+          <div class="tab-header">
+            <h3 class="tab-title">My Wishlist</h3>
+            <span class="tab-count" id="wishlist-tab-count"></span>
+          </div>
+          <div class="wishlist-grid" id="wishlist-grid"></div>
+          <div class="empty-tab hidden" id="wishlist-empty">
+            <div class="empty-tab-icon">🤍</div>
+            <p>Your wishlist is empty</p>
+            <button onclick="window.location.href='index.html'">Browse Products</button>
+          </div>
+        </section>
+
+        <!-- ── TAB: Recent Orders ── -->
+        <section class="prof-tab" id="tab-recent">
+          <div class="tab-header">
+            <h3 class="tab-title">Recent Orders</h3>
+            <a href="order.html" class="view-all-link">View all →</a>
+          </div>
+          <div id="recent-orders-list"></div>
+          <div class="empty-tab hidden" id="recent-empty">
+            <div class="empty-tab-icon">📭</div>
+            <p>No orders yet</p>
+            <button onclick="window.location.href='index.html'">Start Shopping</button>
+          </div>
+        </section>
+
+        <!-- ── TAB: Settings ── -->
+        <section class="prof-tab" id="tab-settings">
+          <div class="tab-header">
+            <h3 class="tab-title">Settings</h3>
+          </div>
+          <div class="settings-list">
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Change Password</span>
+                <span class="setting-desc">Update your login password</span>
+              </div>
+              <button class="setting-btn" onclick="showChangePassword()">Change</button>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Notifications</span>
+                <span class="setting-desc">Order updates and offers</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="notif-toggle" checked onchange="saveSetting('notifications', this.checked)">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Save Address</span>
+                <span class="setting-desc">Remember delivery address</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="address-toggle" checked onchange="saveSetting('saveAddress', this.checked)">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item danger-item">
+              <div class="setting-info">
+                <span class="setting-label">Clear Cart</span>
+                <span class="setting-desc">Remove all items from cart</span>
+              </div>
+              <button class="setting-btn danger-btn" onclick="confirmClearData('cart')">Clear</button>
+            </div>
+
+            <div class="setting-item danger-item">
+              <div class="setting-info">
+                <span class="setting-label">Clear Order History</span>
+                <span class="setting-desc">Delete all your past orders</span>
+              </div>
+              <button class="setting-btn danger-btn" onclick="confirmClearData('orders')">Clear</button>
+            </div>
+
+            <div class="setting-item danger-item">
+              <div class="setting-info">
+                <span class="setting-label">Logout</span>
+                <span class="setting-desc">Sign out of your account</span>
+              </div>
+              <button class="setting-btn danger-btn" onclick="logout()">Logout</button>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="pwd-modal" class="pwd-overlay hidden">
+    <div class="pwd-box">
+      <div class="pwd-header">
+        <h3>Change Password</h3>
+        <button class="modal-close" onclick="closePwdModal()">✕</button>
+      </div>
+      <div class="pwd-fields">
+        <div class="field-group">
+          <label>Current Password</label>
+          <input type="password" id="pwd-current" placeholder="Enter current password">
+        </div>
+        <div class="field-group">
+          <label>New Password</label>
+          <input type="password" id="pwd-new" placeholder="At least 4 characters">
+        </div>
+        <div class="field-group">
+          <label>Confirm New Password</label>
+          <input type="password" id="pwd-confirm" placeholder="Repeat new password">
+        </div>
+        <p class="pwd-error hidden" id="pwd-error"></p>
+      </div>
+      <div class="pwd-actions">
+        <button class="btn-discard" onclick="closePwdModal()">Cancel</button>
+        <button class="btn-save"    onclick="changePassword()">Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirm-modal" class="pwd-overlay hidden">
+    <div class="pwd-box">
+      <div style="text-align:center;padding:10px 0 20px">
+        <div style="font-size:44px;margin-bottom:14px" id="confirm-icon">⚠️</div>
+        <h3 id="confirm-title" style="color:var(--primary);margin-bottom:8px"></h3>
+        <p id="confirm-body" style="color:var(--text-muted);font-size:13.5px;line-height:1.6;margin-bottom:24px"></p>
+        <div style="display:flex;gap:10px">
+          <button class="btn-discard" style="flex:1" onclick="closeConfirmModal()">Cancel</button>
+          <button class="btn-save"    style="flex:1;background:#d44a4a" id="confirm-ok-btn">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>
